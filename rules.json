@@ -1,0 +1,37 @@
+[
+  {
+    "id": 100,
+    "priority": 2,
+    "action": { "type": "allow" },
+    "condition": {
+      "regexFilter": "^https?://(?:(?:www|m)\\.)?medium\\.com/?(?:[?#].*)?$",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  {
+    "id": 101,
+    "priority": 2,
+    "action": { "type": "allow" },
+    "condition": {
+      "regexFilter": "^https?://(?:(?:www|m)\\.)?medium\\.com/@[^/]+/?(?:[?#].*)?$",
+      "resourceTypes": ["main_frame"]
+    }
+  },
+  { "id": 102, "priority": 2, "action": { "type": "allow" }, "condition": { "urlFilter": "||medium.com/me/", "resourceTypes": ["main_frame"] } },
+  { "id": 103, "priority": 2, "action": { "type": "allow" }, "condition": { "urlFilter": "||m.medium.com/me/", "resourceTypes": ["main_frame"] } },
+  { "id": 104, "priority": 2, "action": { "type": "allow" }, "condition": { "urlFilter": "||medium.com/new-story", "resourceTypes": ["main_frame"] } },
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": { "regexSubstitution": "https://freedium.cfd/medium.com\\1" }
+    },
+    "condition": {
+      "regexFilter": "^https?://(?:(?:www|m)\\.)?medium\\.com(/.*)$",
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]
+
+

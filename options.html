@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReadMirror — Settings</title>
+  
+  <link rel="stylesheet" href="options.css">
+  <script defer src="options.js"></script>
+  <style>
+    /* Fallback font faces if Medium fonts fail to load */
+    @font-face { font-family: sohne-fallback; src: local("Helvetica Neue"), local(Helvetica), local(Arial); }
+    @font-face { font-family: source-serif-fallback; src: local(Georgia), local("Times New Roman"), local(Times); }
+  </style>
+  </head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <span class="logo-dot" aria-hidden="true"></span>
+      <h1>ReadMirror</h1>
+      <span class="badge" id="versionBadge">v0.1</span>
+    </div>
+    <nav class="actions">
+      <button id="exportBtn" class="ghost" aria-label="Export settings">⤓ Export</button>
+      <label for="importFile" class="ghost" role="button" aria-label="Import settings">⤒ Import</label>
+      <input id="importFile" type="file" accept="application/json" hidden>
+      <button id="restoreBtn" class="ghost" aria-label="Restore defaults">↺ Restore</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <aside class="preview" aria-label="Live reading preview">
+        <div class="preview-topbar">
+          <div id="previewProgress" class="preview-progress" aria-hidden="true"></div>
+        </div>
+        <article id="previewRoot" class="preview-article" tabindex="0" aria-label="Sample article preview">
+          <header class="freedium-byline">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' rx='24' fill='%23242424'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='18' fill='white'%3ECHX%3C/text%3E%3C/svg%3E" alt="CHX avatar" width="48" height="48" style="border-radius:9999px">
+            <div class="byline-text">
+              <a class="author-name" href="#">Chamath Thiwanka (CHX)</a>
+              <div class="freedium-byline-meta"><time>2025</time> · <span>6 min read</span> <a href="#"><img alt="publication badge" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%236b6b6b'/%3E%3C/svg%3E"/></a></div>
+            </div>
+            <button class="follow">Follow</button>
+          </header>
+
+          <h1>Ship happens: CHX in 2025</h1>
+          <p class="subtitle">How a developer shipped, sipped, and skipped meetings—responsibly.</p>
+
+          <p>Here’s the true story: CHX pressed deploy on a Friday. The app smiled, users smiled, and the error logs took a personal day. It’s 2025; miracles are now CI‑verified.</p>
+          <p>When things got spicy, CHX whispered to the rubber duck: “is it DNS?” The duck nodded in YAML. Problem solved.</p>
+          <blockquote>Lesson: comments explain why, commits explain what, and coffee explains everything else.</blockquote>
+
+          <h2>What changed</h2>
+          <ul>
+            <li>Reading feels like Medium—light, fast, quiet.</li>
+            <li>Links are <a href="#">underlined tastefully</a>, unless you say otherwise.</li>
+            <li>Badges and chrome can hide if you like privacy with your prose.</li>
+          </ul>
+
+          <pre><code>const truth = "CHX shipped on Friday and it was fine";
+console.log(truth); // should be true tho
+</code></pre>
+
+          <p>That’s it. Ship gently. Read generously. And hydrate your scope creep.</p>
+          <hr>
+          <p><small>Preview mirrors your settings in real time.</small></p>
+        </article>
+      </aside>
+
+      <section class="controls">
+        <section class="status" role="status" aria-live="polite">
+          <span class="icon ok" aria-hidden="true">✔</span>
+          <div>
+            <div class="status-title">Automatic unlock is enabled</div>
+            <div class="status-sub">Works silently on Medium.</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Core behavior</h2>
+          <div class="hint">This is an unofficial tool. It redirects Medium links to the freedium.cfd mirror. Review freedium.cfd’s policies. Enable only if you agree.</div>
+          <label class="row">
+            <span>Auto‑unlock Medium paywalled articles</span>
+            <input id="autoUnlock" type="checkbox" class="toggle">
+          </label>
+          <label class="row">
+            <span>Silent mode (no banner/toast)</span>
+            <input id="silentMode" type="checkbox" class="toggle">
+          </label>
+          <div class="row">
+            <span>Open unlocked article</span>
+            <div class="seg">
+              <label><input type="radio" name="openWhere" value="same"> <span>Same tab</span></label>
+              <label><input type="radio" name="openWhere" value="new"> <span>New tab</span></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Unlock engine</h2>
+          <div class="row">
+            <span>Mirror</span>
+            <div class="seg">
+              <label><input type="radio" name="mirror" value="freedium"> <span>Freedium (recommended)</span></label>
+              <label><input type="radio" name="mirror" value="custom"> <span>Custom</span></label>
+            </div>
+          </div>
+          <div id="customMirrorBlock" class="stack hidden">
+            <div class="inline">
+              <input id="customMirrorInput" type="url" placeholder="https://example.com/medium.com" aria-label="Custom mirror URL">
+              <button id="addMirrorBtn" class="ghost">Add</button>
+            </div>
+            <ul id="mirrorList" class="list"></ul>
+          </div>
+          <label class="row">
+            <span>Fallback to Reader Mode extraction</span>
+            <input id="readerFallback" type="checkbox" class="toggle">
+          </label>
+          <div class="row">
+            <label for="cfWait">Retry &amp; wait for Cloudflare challenge</label>
+            <input id="cfWait" type="range" min="10" max="30" step="1">
+            <span class="rangeValue" id="cfWaitVal">15s</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Reading style</h2>
+          <div class="stack">
+            <div class="hint">Customize typography, colors, layout, and hierarchy with a live preview.</div>
+            <button id="openThemeBtn" class="ghost" aria-haspopup="dialog" aria-controls="themeModal">Open theme editor</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Site scope</h2>
+          <div class="stack">
+            <div class="hint">Always enabled on <code>medium.com</code>. Exclude paths if needed.</div>
+            <div class="inline">
+              <input id="excludeInput" type="text" placeholder="/me|/new-story" aria-label="Path patterns to exclude">
+              <button id="addExcludeBtn" class="ghost">Add</button>
+            </div>
+            <ul id="excludeList" class="list"></ul>
+          </div>
+        </section>
+
+        <!-- Privacy panel removed: no telemetry collected. -->
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- Theme modal -->
+  <div id="themeModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="themeTitle">
+    <div class="modal">
+      <header class="modal-header">
+        <h2 id="themeTitle">Customize reading style</h2>
+        <button id="closeThemeBtn" class="ghost" aria-label="Close">✕</button>
+      </header>
+      <div class="modal-grid">
+        <aside class="modal-preview" aria-label="Live preview">
+          <div class="preview-topbar"><div id="modalPreviewProgress" class="preview-progress" aria-hidden="true"></div></div>
+          <article id="modalPreviewRoot" class="preview-article" tabindex="0">
+            <header class="freedium-byline">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Crect width='48' height='48' rx='24' fill='%23242424'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-family='Arial, Helvetica, sans-serif' font-size='18' fill='white'%3ECHX%3C/text%3E%3C/svg%3E" alt="CHX avatar" width="48" height="48" style="border-radius:9999px">
+              <div class="byline-text">
+                <a class="author-name" href="#">Chamath Thiwanka (CHX)</a>
+                <div class="freedium-byline-meta"><time>2025</time> · <span>6 min read</span> <a href="#"><img alt="publication badge" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%236b6b6b'/%3E%3C/svg%3E"/></a></div>
+              </div>
+              <button class="follow">Follow</button>
+            </header>
+            <h1 id="previewTitle">Ship happens: a cute tale of CHX in 2025</h1>
+            <p class="subtitle" id="previewSubtitle">How a developer shipped, sipped, and skipped meetings—responsibly.</p>
+            <div id="previewBody">
+              <p>Here’s the true story: CHX pressed deploy on a Friday. The app smiled, users smiled, and the error logs took a personal day. It’s 2025; miracles are now CI‑verified.</p>
+              <p>When things got spicy, CHX whispered to the rubber duck: “is it DNS?” The duck nodded in YAML. Problem solved.</p>
+              <blockquote>Lesson: comments explain why, commits explain what, and coffee explains everything else.</blockquote>
+              <h2>What changed</h2>
+              <ul>
+                <li>Reading feels like Medium—light, fast, quiet.</li>
+                <li>Links are <a href="#">underlined tastefully</a>, unless you say otherwise.</li>
+                <li>Badges and chrome can hide if you like privacy with your prose.</li>
+              </ul>
+              <pre><code>const truth = "CHX shipped on Friday and it was fine";
+console.log(truth); // should be true tho
+</code></pre>
+              <p>That’s it. Ship gently. Read generously. And hydrate your scope creep.</p>
+              <hr>
+              <p><small>Preview mirrors your settings in real time.</small></p>
+            </div>
+          </article>
+        </aside>
+        <section class="modal-controls">
+          <div class="panel">
+            <h3>Preset</h3>
+            <div class="chips" id="presetChips">
+              <button data-preset="medium" class="chip selected">Match Medium</button>
+              <button data-preset="serif" class="chip">System Serif</button>
+              <button data-preset="contrast" class="chip">High Contrast</button>
+              <button data-preset="bookish" class="chip">Bookish</button>
+              <button data-preset="focus" class="chip">Focus</button>
+              <button data-preset="sepia" class="chip">Sepia</button>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Typography</h3>
+            <div class="stack">
+              <label class="row"><span>UI font</span>
+                <select id="uiFont">
+                  <option value="sohne">Medium UI (sohne)</option>
+                  <option value="system-sans">System Sans</option>
+                </select>
+              </label>
+              <label class="row"><span>Body font</span>
+                <select id="bodyFont">
+                  <option value="source-serif-pro">Source Serif Pro</option>
+                  <option value="system-serif">System Serif</option>
+                  <option value="system-sans">System Sans</option>
+                </select>
+              </label>
+              <label class="row"><span>Text size</span><input id="textScale" type="range" min="90" max="120" step="1"><span class="rangeValue" id="textScaleVal">100%</span></label>
+              <label class="row"><span>Heading scale</span><input id="headingScale" type="range" min="90" max="115" step="1"><span class="rangeValue" id="headingScaleVal">100%</span></label>
+              <label class="row"><span>Heading weight</span><input id="headingWeight" type="range" min="500" max="800" step="25"><span class="rangeValue" id="headingWeightVal">700</span></label>
+              <label class="row"><span>Body weight</span><input id="bodyWeight" type="range" min="300" max="500" step="25"><span class="rangeValue" id="bodyWeightVal">400</span></label>
+              <label class="row"><span>Line height</span><input id="lineHeight" type="range" min="145" max="170" step="1"><span class="rangeValue" id="lineHeightVal">158%</span></label>
+              <label class="row"><span>Column width</span><input id="columnWidth" type="range" min="680" max="920" step="4"><span class="rangeValue" id="columnWidthVal">816px</span></label>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Colors & details</h3>
+            <div class="stack">
+              <label class="row"><span>Background</span><input id="backgroundColor" type="color" value="#ffffff" aria-label="Background color"></label>
+              <label class="row"><span>Accent</span><input id="accentColor" type="color" value="#1a8917" aria-label="Accent color"></label>
+              <label class="row"><span>Underline links</span><input id="underlineLinks" type="checkbox" class="toggle" checked></label>
+              <label class="row"><span>Reading progress bar</span><input id="progressBar" type="checkbox" class="toggle"></label>
+              <label class="row"><span>Hide badges & social</span><input id="hideBadges" type="checkbox" class="toggle" checked></label>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Hierarchy order</h3>
+            <div class="hint">Drag to reorder how elements appear.</div>
+            <ul id="hierarchyList" class="dnd-list" aria-label="Hierarchy order">
+              <li draggable="true" data-key="title">Title</li>
+              <li draggable="true" data-key="subtitle">Subtitle</li>
+              <li draggable="true" data-key="byline">Byline</li>
+              <li draggable="true" data-key="body">Body</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span>This extension is an independent, unofficial tool. It is not affiliated with, endorsed by, or associated with Medium or freedium.cfd. Content is served by <a href="https://freedium.cfd" target="_blank" rel="noreferrer">freedium.cfd</a>. The extension only redirects links and applies on‑page style tweaks.</span>
+  </footer>
+</body>
+</html>
+
+
