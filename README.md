@@ -1,5 +1,16 @@
 # ReadMirror for Medium.com (Unofficial)
 
+![1](https://github.com/user-attachments/assets/458c5853-0798-4e1e-9115-33475fe8b8e1)
+
+![2](https://github.com/user-attachments/assets/f2f62e0e-6ef9-4178-a5e7-7ebb0023ae9b)
+
+![3](https://github.com/user-attachments/assets/a2676364-a696-426e-9ba1-7aea13967902)
+
+![4](https://github.com/user-attachments/assets/d1200961-f031-49c5-b570-1e8a4b9fcf14)
+
+![5](https://github.com/user-attachments/assets/c2827f87-31ae-49ae-9173-f81510c7625c)
+
+
 Redirects Medium URLs to Freedium and applies optional styling on `https://freedium.cfd/medium.com/*` pages. Avoids interfering with Cloudflare interstitials.
 
 Privacy: This extension does not collect, transmit, or sell any personal data. Settings are stored locally via `chrome.storage.sync`. No telemetry or analytics are collected.
