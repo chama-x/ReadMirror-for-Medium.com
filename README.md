@@ -1,4 +1,4 @@
-# ReadMirror for Medium.com (Unofficial)
+## ReadMirror for Medium (Unofficial)
 
 ![1](https://github.com/user-attachments/assets/458c5853-0798-4e1e-9115-33475fe8b8e1)
 
@@ -11,40 +11,27 @@
 ![5](https://github.com/user-attachments/assets/c2827f87-31ae-49ae-9173-f81510c7625c)
 
 
-Redirects Medium URLs to Freedium and applies optional styling on `https://freedium.cfd/medium.com/*` pages. Avoids interfering with Cloudflare interstitials.
+Open Medium links on Freedium. Clean. Fast. Private.
 
-Privacy: This extension does not collect, transmit, or sell any personal data. Settings are stored locally via `chrome.storage.sync`. No telemetry or analytics are collected.
+### Install in Chrome/Chromium
 
-## What it does
+1. Download this project as a ZIP and unzip it.
+2. Open `chrome://extensions/`.
+3. Turn on Developer mode (top right).
+4. Click "Load unpacked".
+5. Select the unzipped `freedium-redirector` folder.
+6. Open any Medium article — it should open on Freedium.
 
-- Redirects `http(s)://medium.com/...` → `https://freedium.cfd/medium.com/...` using Declarative Net Request for speed and simplicity.
-- On `https://freedium.cfd/medium.com/...`, injects a safe, no-op CSS hook. It detects Cloudflare interstitials ("Just a moment...") and waits them out before applying tweaks.
+Works in Chrome, Brave, Edge, Arc, Vivaldi, and other Chromium browsers.
 
-## Install (Developer Mode)
+### How it works
 
-1. Open Chrome and go to `chrome://extensions/`.
-2. Toggle on Developer mode (top-right).
-3. Click "Load unpacked" and select this `freedium-redirector` folder.
-4. Open any Medium article to verify it redirects to Freedium.
+Redirects `medium.com` to `https://freedium.cfd/medium.com/...`. That’s it.
 
-## Files
+### Privacy
 
-- `manifest.json`: MV3 manifest with redirect rules and content script (MV3, no remote code).
-- `rules.json`: Network redirect rule from Medium → Freedium.
-- `content.js`: Styling hook on Freedium pages; no interference during Cloudflare checks.
+No data collected. No analytics. Settings stay on your device.
 
-## Permissions
+### Legal
 
-- Required: `declarativeNetRequest`, `storage`.
-- Host access: `https://medium.com/*` only.
-
-## Legal & attribution
-
-- All article content is served by `freedium.cfd`. This extension is only a link converter with optional client-side style customizations. It does not host, cache, or modify the source content beyond presentation tweaks in your browser.
-- `medium.com` and Medium marks are trademarks of A Medium Corporation. This project is an independent, unofficial tool and is not affiliated with, endorsed by, or associated with Medium or freedium.cfd.
-
-Report a legal concern: open an issue on the repository or email the developer (add preferred contact in the Web Store “Support contact”).
-
-## Customize styling later
-
-Edit the placeholder style block inside `content.js` (scoped to `html.freedium-tweaks`).
+Content is served by `freedium.cfd`. This is an independent, unofficial tool and is not affiliated with Medium or Freedium.
